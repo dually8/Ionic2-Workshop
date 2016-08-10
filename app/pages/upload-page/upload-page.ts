@@ -37,7 +37,8 @@ export class UploadPage {
 
     showLogin(): void {
         if (!this.loginModal.isLoaded() || !this.loginModal.isLast()) {
-            // create and present modal
+            this.loginModal = this.modalCtrl.create(LoginModalPage);
+            this.loginModal.present();
         }
     }
 
@@ -103,7 +104,24 @@ export class UploadPage {
     }
 
     uploadPic(): void {
-        // todo: create upload pic function
+        if (this.photo && this.photo.length > 0) {
+            this.fbProv.uploadPic(this.photo)
+                .then((res) => {
+                    this.toastCtrl.create({
+                        message: 'Uploaded photo successfully!',
+                        position: 'middle',
+                        duration: 3000
+                    }).present();
+                }).catch((err) => {
+                    console.error(err);
+                });
+        } else {
+            this.toastCtrl.create({
+                message: 'No photo to upload.',
+                position: 'middle',
+                duration: 3000
+            }).present();
+        }
     }
 
     private getPicture(opts: CameraOptions): void {
@@ -135,11 +153,51 @@ class LoginModalPage {
     }
 
     login(): void {
-        // todo: create login function
+        this.fbProv.loginWithEmail(this.email, this.password)
+            .then((res) => {
+                this.toastCtrl.create({
+                    message: 'Login successful!',
+                    position: 'middle',
+                    duration: 3000
+                }).present().then(() => {
+                    this.dismiss();
+                });
+            }).catch((er) => {
+                console.error('promise failed');
+                let toast = this.toastCtrl.create({
+                    message: '',
+                    position: 'middle',
+                    duration: 3000
+                });
+                if (er.message) {
+                    toast.setMessage(er.message);
+                    toast.present();
+                } else {
+                    toast.setMessage(JSON.stringify(er, null, 2));
+                    toast.present();
+                }
+            });
     }
 
     createAccount(): void {
-        // todo: create make account function
+        this.fbProv.createAccount(this.email, this.password)
+            .then((res) => {
+                this.login();
+            }).catch((er) => {
+                console.error('promise failed');
+                let toast = this.toastCtrl.create({
+                    message: '',
+                    position: 'middle',
+                    duration: 3000
+                });
+                if (er.message) {
+                    toast.setMessage(er.message);
+                    toast.present();
+                } else {
+                    toast.setMessage(JSON.stringify(er, null, 2));
+                    toast.present();
+                }
+            });
     }
 
     dismiss(): void {

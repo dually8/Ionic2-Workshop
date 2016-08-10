@@ -21,10 +21,16 @@ describe('UploadPage', () => {
     });
 
     it('should be defined', inject(pageDep, (_nav, _modal, _action, _toast, _fb) => {
-        // todo: complete this test
+        page = new UploadPage(_nav, _modal, _action, _toast, _fb);
+        expect(page).toBeDefined();
     }));
 
     it('should take pic', inject(pageDep, (_nav, _modal, _action, _toast, _fb) => {
-        // todo: complete this test
+        page = new UploadPage(_nav, _modal, _action, _toast, _fb);
+        spyOn(page, 'takePic').and.callFake(() => {
+            page.photo = 'got photo';
+        });
+        page.takePic();
+        expect(page.takePic).toHaveBeenCalled();
     }));
 });

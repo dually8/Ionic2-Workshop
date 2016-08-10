@@ -19,10 +19,14 @@ describe('ViewPage', () => {
     });
 
     it('should be defined', inject(pageDep, (_nav, _load, _fb) => {
-        // todo: complete this test
+        page = new ViewPage(_nav, _load, _fb);
+        expect(page).toBeDefined();
     }));
 
     it('should call get photos', inject(pageDep, (_nav, _load, _fb) => {
-        // todo: complete this test
+        page = new ViewPage(_nav, _load, _fb);
+        spyOn(page, 'getPhotos').and.callThrough();
+        page.getPhotos();
+        expect(page.getPhotos).toHaveBeenCalled();
     }));
 });

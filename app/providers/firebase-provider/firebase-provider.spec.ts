@@ -9,12 +9,11 @@ let specProviders = serviceProviders.concat([
 
 describe('FirebaseProvider', () => {
 
-    // todo: fill in your firebase credentials here.
     const config = {
-        apiKey: '{YOUR STUFF HERE}',
-        authDomain: '{YOUR STUFF HERE}',
-        databaseURL: '{YOUR STUFF HERE}',
-        storageBucket: '{YOUR STUFF HERE}',
+        apiKey: '',
+        authDomain: '',
+        databaseURL: '',
+        storageBucket: '',
     };
 
     firebase.initializeApp(config); // call ONLY ONCE
@@ -24,10 +23,13 @@ describe('FirebaseProvider', () => {
     });
 
     it('should be defined', async(inject([FirebaseProvider], (_fb: FirebaseProvider) => {
-        // todo: complete this test
+        expect(_fb).toBeDefined();
     })));
 
     it('should login with email', async(inject([FirebaseProvider], (_fb: FirebaseProvider) => {
-        // todo: complete this test
+        _fb.loginWithEmail('test@test.com', 'test123')
+            .then((user) => {
+                expect(_fb.isAuthenticated).toBe(true);
+            });
     })));
 });

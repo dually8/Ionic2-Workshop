@@ -38,7 +38,15 @@ export class ViewPage {
 
     getPhotos(): Promise<any> {
         return new Promise((resolve, reject) => {
-            // todo: get the photos from firebase
+            this.fbProv.getPics()
+                .then((photos) => {
+                    this.myPhotos = photos;
+                    resolve();
+                }).catch((er) => {
+                    console.error('getPhotos error');
+                    console.error(JSON.stringify(er));
+                    reject();
+                });
         });
     }
 }

@@ -33,12 +33,12 @@ class MyApp {
             StatusBar.styleDefault();
 
             // firebase stuff
-            // todo: fill in your firebase credentials here.
+
             const config = {
-                apiKey: '{YOUR STUFF HERE}',
-                authDomain: '{YOUR STUFF HERE}',
-                databaseURL: '{YOUR STUFF HERE}',
-                storageBucket: '{YOUR STUFF HERE}',
+                apiKey: '',
+                authDomain: '',
+                databaseURL: '',
+                storageBucket: '',
             };
 
             const app = firebase.initializeApp(config); // call only once!
