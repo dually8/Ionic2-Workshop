@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-navbar>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Upload Photos</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding class="upload-page">
+
+  <button block secondary (click)="showLogin()">Login</button>
+
+  <button block primary (click)="openOptions()">Take Pic</button>
+
+  <button block primary (click)="uploadPic()">Upload Pic</button>
+
+  <img *ngIf="photo && photo.length > 0" style="width: 100%; height: auto;" src="{{photo}}" />
+
+</ion-content>

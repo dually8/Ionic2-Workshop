@@ -1,0 +1,30 @@
+.view-page {
+  .pic-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding: 2px 5px;
+  }
+
+  .pic-grid-item {
+    padding: 2px 5px;
+  }
+
+  .pic-grid-item img {
+    width: 100px;
+    height: auto;
+    border: 2px solid black;
+  }
+
+  .pic-container {
+    padding-top: 5%;
+    width: 100%;
+    height: auto;
+  }
+
+  .pic-container img {
+    width: 100%;
+    height: auto;
+  }
+}
+

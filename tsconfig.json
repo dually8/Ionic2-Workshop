@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
+  },
+  "filesGlob": [
+    "**/*.ts",
+    "!node_modules/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "typings/global",
+    "typings/global.d.ts"
+  ],
+  "compileOnSave": false,
+  "atom": {
+    "rewriteTsconfig": false
+  },
+  "files": [
+    "typings/globals/es6-shim/index.d.ts",
+    "typings/globals/firebase3/index.d.ts",
+    "typings/globals/jasmine/index.d.ts",
+    "typings/index.d.ts",
+    "app/app.ts",
+    "app/pages/upload-page/upload-page.spec.ts",
+    "app/pages/upload-page/upload-page.ts",
+    "app/pages/view-page/view-page.spec.ts",
+    "app/pages/view-page/view-page.ts",
+    "app/providers/firebase-provider/firebase-provider.spec.ts",
+    "app/providers/firebase-provider/firebase-provider.ts",
+    "test/common-providers.ts",
+    "test/mocks.ts",
+    "test/test-utils.ts"
+  ]
+}

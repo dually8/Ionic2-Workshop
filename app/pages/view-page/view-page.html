@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-navbar>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>My Saved Photos</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="view-page">
+  <h2 *ngIf="myPhotos.length < 1">No photos available.</h2>
+  <br />
+  <div *ngIf="myPhotos.length > 0" class="pic-grid">
+    <div class="pic-grid-item" *ngFor="let pic of myPhotos">
+      <img src="{{pic}}" />
+    </div>
+  </div>
+</ion-content>
