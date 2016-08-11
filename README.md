@@ -4,14 +4,24 @@ This workshop was put together in order to teach the basics of Ionic 2, Angular 
 
 ## Table of Contents
 
+- [Requirements](#requirements)
+- [Getting Started](#getting-started)
+- [Setting up Firebase](#setting-up-firebase)
+- [Next steps](#next-steps)
+
 ## Requirements
+
+- Ionic beta CLI `[sudo] npm i -g ionic@beta`
+- Optional
+  - Angular CLI `[sudo] npm i -g angular-cli`
+  - Karma CLI `[sudo] npm i -g karma-cli`
 
 ## Getting Started
 
 1. Clone the repo `git clone https://github.com/dually8/Ionic2-Workshop.git`
 2. Run `npm install` in order to install the dependencies.
 3. Run `ionic state reset` in order to install the platforms and cordova plugins.
-4. Run 'gulp unit-test` or `npm test` to run the unit tests.
+4. Run `gulp unit-test` or `npm test` to run the unit tests.
 
 ## Setting up Firebase
 
