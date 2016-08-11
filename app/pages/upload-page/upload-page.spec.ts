@@ -25,12 +25,10 @@ describe('UploadPage', () => {
         expect(page).toBeDefined();
     }));
 
-    it('should take pic', inject(pageDep, (_nav, _modal, _action, _toast, _fb) => {
+    it('should take pic', async(inject(pageDep, (_nav, _modal, _action, _toast, _fb) => {
         page = new UploadPage(_nav, _modal, _action, _toast, _fb);
-        spyOn(page, 'takePic').and.callFake(() => {
-            page.photo = 'got photo';
-        });
+        spyOn(page, 'getPicture');
         page.takePic();
-        expect(page.takePic).toHaveBeenCalled();
-    }));
+        expect(page['getPicture']).toHaveBeenCalled();
+    })));
 });

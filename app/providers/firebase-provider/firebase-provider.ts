@@ -42,7 +42,7 @@ export class FirebaseProvider {
         return new Promise((resolve, reject) => {
             firebase.auth().signInWithEmailAndPassword(email, password)
                 .then((user) => {
-                    console.log('Logged in user: ' + user.email);
+                    console.log(`Logged in user: ${user.email}`);
                     resolve(user);
                 }).catch((er) => {
                     console.error(er);
@@ -51,7 +51,7 @@ export class FirebaseProvider {
         });
     }
 
-    getPics(): Promise<any> {
+    getPics(): Promise<string[]> {
         return new Promise((resolve, reject) => {
             if (!this.isAuthenticated) {
                 reject('not authenticated');

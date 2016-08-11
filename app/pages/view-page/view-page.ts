@@ -39,13 +39,14 @@ export class ViewPage {
     getPhotos(): Promise<any> {
         return new Promise((resolve, reject) => {
             this.fbProv.getPics()
-                .then((photos) => {
-                    this.myPhotos = photos;
+                .then((pics: string[]) => {
+                    console.log(`Got ${pics.length} pics`);
+                    // console.log('Got ' + pics.length + ' pics');
+                    this.myPhotos = pics;
                     resolve();
                 }).catch((er) => {
-                    console.error('getPhotos error');
-                    console.error(JSON.stringify(er));
-                    reject();
+                    console.error(er);
+                    reject(er);
                 });
         });
     }

@@ -23,12 +23,16 @@ export class UploadPage {
         public toastCtrl: ToastController,
         private fbProv: FirebaseProvider) {
         this.loginModal = this.modalCtrl.create(LoginModalPage);
-        this.photo = '';
     }
 
     ionViewDidEnter(): void {
         if (firebase.auth().currentUser) {
             console.log(firebase.auth().currentUser.email);
+            this.toastCtrl.create({
+                duration: 3000,
+                message: `${firebase.auth().currentUser.email} is logged in.`,
+                position: 'middle'
+            }).present();
         } else {
             console.log('no current user');
             this.showLogin();
@@ -74,7 +78,7 @@ export class UploadPage {
     openGallery(): void {
         const opts: CameraOptions = {
             // Some common settings are 20, 50, and 100
-            quality: 20,
+            quality: 1,
             destinationType: Camera.DestinationType.DATA_URL,
             // In this app, dynamically set the picture source, Camera or photo gallery
             sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
@@ -89,7 +93,7 @@ export class UploadPage {
     takePic(): void {
         const opts: CameraOptions = {
             // Some common settings are 20, 50, and 100
-            quality: 20,
+            quality: 1,
             destinationType: Camera.DestinationType.DATA_URL,
             // In this app, dynamically set the picture source, Camera or photo gallery
             sourceType: Camera.PictureSourceType.CAMERA,
@@ -104,27 +108,27 @@ export class UploadPage {
     }
 
     uploadPic(): void {
-        if (this.photo && this.photo.length > 0) {
-            this.fbProv.uploadPic(this.photo)
-                .then((res) => {
-                    this.toastCtrl.create({
-                        message: 'Uploaded photo successfully!',
-                        position: 'middle',
-                        duration: 3000
-                    }).present();
-                }).catch((err) => {
-                    console.error(err);
-                });
-        } else {
-            this.toastCtrl.create({
-                message: 'No photo to upload.',
-                position: 'middle',
-                duration: 3000
-            }).present();
+        if (!this.photo) {
+            return;
         }
+        this.fbProv.uploadPic(this.photo)
+            .then((res) => {
+                this.toastCtrl.create({
+                    duration: 3000,
+                    message: 'Uploaded photo successfully!',
+                    position: 'middle'
+                }).present();
+            }).catch((er) => {
+                this.toastCtrl.create({
+                    duration: 3000,
+                    message: 'Failed to upload photo',
+                    position: 'middle'
+                }).present();
+            });
     }
 
     private getPicture(opts: CameraOptions): void {
+        console.log('gittin da pic');
         Camera.getPicture(opts)
             .then((imgData) => {
                 this.photo = 'data:image/jpeg;base64,' + imgData;
@@ -154,49 +158,38 @@ class LoginModalPage {
 
     login(): void {
         this.fbProv.loginWithEmail(this.email, this.password)
-            .then((res) => {
-                this.toastCtrl.create({
-                    message: 'Login successful!',
-                    position: 'middle',
-                    duration: 3000
-                }).present().then(() => {
-                    this.dismiss();
-                });
+            .then(() => {
+                // show success
+                this.viewCtrl.dismiss()
+                    .then(() => {
+                        this.toastCtrl.create({
+                            duration: 3000,
+                            message: 'Login successful! :)'
+                        }).present();
+                    });
             }).catch((er) => {
-                console.error('promise failed');
-                let toast = this.toastCtrl.create({
-                    message: '',
-                    position: 'middle',
-                    duration: 3000
-                });
-                if (er.message) {
-                    toast.setMessage(er.message);
-                    toast.present();
-                } else {
-                    toast.setMessage(JSON.stringify(er, null, 2));
-                    toast.present();
-                }
+                // show error
+                this.toastCtrl.create({
+                    duration: 3000,
+                    message: 'Login failed'
+                }).present();
             });
     }
 
     createAccount(): void {
         this.fbProv.createAccount(this.email, this.password)
-            .then((res) => {
-                this.login();
+            .then(() => {
+                // show success
+                this.toastCtrl.create({
+                    duration: 3000,
+                    message: 'Created account! :)'
+                }).present();
             }).catch((er) => {
-                console.error('promise failed');
-                let toast = this.toastCtrl.create({
-                    message: '',
-                    position: 'middle',
-                    duration: 3000
-                });
-                if (er.message) {
-                    toast.setMessage(er.message);
-                    toast.present();
-                } else {
-                    toast.setMessage(JSON.stringify(er, null, 2));
-                    toast.present();
-                }
+                // show error
+                this.toastCtrl.create({
+                    duration: 3000,
+                    message: 'Create account failed :('
+                }).present();
             });
     }
 

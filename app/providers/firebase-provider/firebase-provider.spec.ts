@@ -1,4 +1,4 @@
-import { addProviders, async, beforeEach, describe, expect, it, fit, inject } from '@angular/core/testing';
+import { addProviders, async, inject } from '@angular/core/testing';
 import { provide } from '@angular/core';
 import { serviceProviders } from '../../../test/common-providers';
 import { FirebaseProvider } from './firebase-provider';
@@ -29,7 +29,7 @@ describe('FirebaseProvider', () => {
     it('should login with email', async(inject([FirebaseProvider], (_fb: FirebaseProvider) => {
         _fb.loginWithEmail('test@test.com', 'test123')
             .then((user) => {
-                expect(_fb.isAuthenticated).toBe(true);
+                expect(user).toBeDefined();
             });
     })));
 });

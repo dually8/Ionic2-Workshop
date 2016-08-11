@@ -6,13 +6,14 @@ import { FirebaseProvider } from '../../providers/firebase-provider/firebase-pro
 import { ViewPage } from './view-page';
 
 let specProviders = baseProviders.concat([
-    FirebaseProvider,
+    // FirebaseProvider,
+    provide(FirebaseProvider, { useClass: FirebaseProvider }),
     provide(LoadingController, { useClass: LoadingController }),
 ]);
 
 describe('ViewPage', () => {
     let page: ViewPage;
-    let pageDep: any[] = [NavController, FirebaseProvider];
+    let pageDep: any[] = [NavController, LoadingController, FirebaseProvider];
 
     beforeEach(() => {
         addProviders(specProviders);
@@ -23,10 +24,22 @@ describe('ViewPage', () => {
         expect(page).toBeDefined();
     }));
 
-    it('should call get photos', inject(pageDep, (_nav, _load, _fb) => {
+    it('should call get photos', async(inject(pageDep, (_nav, _load, _fb: FirebaseProvider) => {
         page = new ViewPage(_nav, _load, _fb);
-        spyOn(page, 'getPhotos').and.callThrough();
-        page.getPhotos();
-        expect(page.getPhotos).toHaveBeenCalled();
-    }));
+        spyOn(_fb, 'getPics').and.returnValue(new Promise((resolve) => {resolve(['pics']); }));
+        page.getPhotos()
+            .then(() => {
+                expect(_fb.getPics).toHaveBeenCalled();
+                expect(page.myPhotos[0]).toBe('pics');
+            });
+    })));
+
+    it('should have pics', async(inject(pageDep, (_nav, _load, _fb: FirebaseProvider) => {
+        page = new ViewPage(_nav, _load, _fb);
+        spyOn(_fb, 'getPics').and.returnValue(new Promise((resolve) => {resolve(['pics']); }));
+        page.getPhotos()
+            .then(() => {
+                expect(page.myPhotos[0]).toBe('pics');
+            });
+    })));
 });
