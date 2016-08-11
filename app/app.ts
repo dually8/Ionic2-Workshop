@@ -33,7 +33,7 @@ class MyApp {
             StatusBar.styleDefault();
 
             // firebase stuff
-
+            // todo: put your own stuff here
             const config = {
                 apiKey: '',
                 authDomain: '',

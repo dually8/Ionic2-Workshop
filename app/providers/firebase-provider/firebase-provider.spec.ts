@@ -10,6 +10,7 @@ let specProviders = serviceProviders.concat([
 describe('FirebaseProvider', () => {
 
     const config = {
+        // todo: put your own stuff here
         apiKey: '',
         authDomain: '',
         databaseURL: '',
