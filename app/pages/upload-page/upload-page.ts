@@ -23,12 +23,16 @@ export class UploadPage {
         public toastCtrl: ToastController,
         private fbProv: FirebaseProvider) {
         this.loginModal = this.modalCtrl.create(LoginModalPage);
-        this.photo = '';
     }
 
     ionViewDidEnter(): void {
         if (firebase.auth().currentUser) {
             console.log(firebase.auth().currentUser.email);
+            this.toastCtrl.create({
+                duration: 3000,
+                message: `${firebase.auth().currentUser.email} is logged in.`,
+                position: 'middle'
+            }).present();
         } else {
             console.log('no current user');
             this.showLogin();
@@ -37,7 +41,7 @@ export class UploadPage {
 
     showLogin(): void {
         if (!this.loginModal.isLoaded() || !this.loginModal.isLast()) {
-            // create and present modal
+            // todo: create and present modal
         }
     }
 
@@ -73,7 +77,7 @@ export class UploadPage {
     openGallery(): void {
         const opts: CameraOptions = {
             // Some common settings are 20, 50, and 100
-            quality: 20,
+            quality: 1,
             destinationType: Camera.DestinationType.DATA_URL,
             // In this app, dynamically set the picture source, Camera or photo gallery
             sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
@@ -88,7 +92,7 @@ export class UploadPage {
     takePic(): void {
         const opts: CameraOptions = {
             // Some common settings are 20, 50, and 100
-            quality: 20,
+            quality: 1,
             destinationType: Camera.DestinationType.DATA_URL,
             // In this app, dynamically set the picture source, Camera or photo gallery
             sourceType: Camera.PictureSourceType.CAMERA,
@@ -107,6 +111,7 @@ export class UploadPage {
     }
 
     private getPicture(opts: CameraOptions): void {
+        console.log('gittin da pic');
         Camera.getPicture(opts)
             .then((imgData) => {
                 this.photo = 'data:image/jpeg;base64,' + imgData;

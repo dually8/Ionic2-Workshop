@@ -12,17 +12,22 @@ let specProviders = baseProviders.concat([
 
 describe('ViewPage', () => {
     let page: ViewPage;
-    let pageDep: any[] = [NavController, FirebaseProvider];
+    let pageDep: any[] = [NavController, LoadingController, FirebaseProvider];
 
     beforeEach(() => {
         addProviders(specProviders);
     });
 
     it('should be defined', inject(pageDep, (_nav, _load, _fb) => {
-        // todo: complete this test
+        page = new ViewPage(_nav, _load, _fb);
+        expect(page).toBeDefined();
     }));
 
-    it('should call get photos', inject(pageDep, (_nav, _load, _fb) => {
+    it('should call FirebaseProvider.getPics when ViewPage.getPhotos is called', async(inject(pageDep, (_nav, _load, _fb: FirebaseProvider) => {
         // todo: complete this test
-    }));
+    })));
+
+    it('should return one pic', async(inject(pageDep, (_nav, _load, _fb: FirebaseProvider) => {
+        // todo: complete this test
+    })));
 });

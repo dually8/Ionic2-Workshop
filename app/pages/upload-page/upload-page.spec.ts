@@ -24,7 +24,7 @@ describe('UploadPage', () => {
         // todo: complete this test
     }));
 
-    it('should take pic', inject(pageDep, (_nav, _modal, _action, _toast, _fb) => {
+    it('should call getPicture if takePic is called', async(inject(pageDep, (_nav, _modal, _action, _toast, _fb) => {
         // todo: complete this test
-    }));
+    })));
 });
