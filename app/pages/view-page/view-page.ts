@@ -3,8 +3,7 @@ import { LoadingController, NavController, NavParams } from 'ionic-angular';
 import { FirebaseProvider } from '../../providers/firebase-provider/firebase-provider';
 
 @Component({
-    templateUrl: 'build/pages/view-page/view-page.html',
-    providers: [FirebaseProvider]
+    templateUrl: 'build/pages/view-page/view-page.html'
 })
 export class ViewPage {
 
@@ -38,7 +37,7 @@ export class ViewPage {
 
     getPhotos(): Promise<any> {
         return new Promise((resolve, reject) => {
-            // todo: get the photos from firebase
+            // todo 6: get the photos from firebase
         });
     }
 }

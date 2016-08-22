@@ -22,7 +22,6 @@ export class UploadPage {
         public actionSheetCtrl: ActionSheetController,
         public toastCtrl: ToastController,
         private fbProv: FirebaseProvider) {
-        this.loginModal = this.modalCtrl.create(LoginModalPage);
     }
 
     ionViewDidEnter(): void {
@@ -40,8 +39,8 @@ export class UploadPage {
     }
 
     showLogin(): void {
-        if (!this.loginModal.isLoaded() || !this.loginModal.isLast()) {
-            // todo: create and present modal
+        if (!this.loginModal || !this.loginModal.isLoaded() || !this.loginModal.isLast()) {
+            // todo 2: create and present modal
         }
     }
 
@@ -107,7 +106,7 @@ export class UploadPage {
     }
 
     uploadPic(): void {
-        // todo: create upload pic function
+        // todo 5: create upload pic function
     }
 
     private getPicture(opts: CameraOptions): void {
@@ -123,8 +122,7 @@ export class UploadPage {
 }
 
 @Component({
-    templateUrl: 'build/pages/upload-page/login.html',
-    providers: [FirebaseProvider]
+    templateUrl: 'build/pages/upload-page/login.html'
 })
 class LoginModalPage {
 
@@ -140,11 +138,11 @@ class LoginModalPage {
     }
 
     login(): void {
-        // todo: create login function
+        // todo 3: create login function
     }
 
     createAccount(): void {
-        // todo: create make account function
+        // todo 4: create make account function
     }
 
     dismiss(): void {
