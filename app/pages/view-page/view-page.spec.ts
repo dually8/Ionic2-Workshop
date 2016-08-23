@@ -24,7 +24,7 @@ describe('ViewPage', () => {
         expect(page).toBeDefined();
     }));
 
-    it('should call get photos', async(inject(pageDep, (_nav, _load, _fb: FirebaseProvider) => {
+    it('should call FirebaseProvider.getPics when ViewPage.getPhotos is called', async(inject(pageDep, (_nav, _load, _fb: FirebaseProvider) => {
         page = new ViewPage(_nav, _load, _fb);
         spyOn(_fb, 'getPics').and.returnValue(new Promise((resolve) => {resolve(['pics']); }));
         page.getPhotos()
@@ -34,7 +34,7 @@ describe('ViewPage', () => {
             });
     })));
 
-    it('should have pics', async(inject(pageDep, (_nav, _load, _fb: FirebaseProvider) => {
+    it('should return one pic', async(inject(pageDep, (_nav, _load, _fb: FirebaseProvider) => {
         page = new ViewPage(_nav, _load, _fb);
         spyOn(_fb, 'getPics').and.returnValue(new Promise((resolve) => {resolve(['pics']); }));
         page.getPhotos()

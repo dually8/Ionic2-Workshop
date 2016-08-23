@@ -21,14 +21,17 @@ describe('UploadPage', () => {
     });
 
     it('should be defined', inject(pageDep, (_nav, _modal, _action, _toast, _fb) => {
+        // todo: complete this test
         page = new UploadPage(_nav, _modal, _action, _toast, _fb);
         expect(page).toBeDefined();
     }));
 
     it('should take pic', async(inject(pageDep, (_nav, _modal, _action, _toast, _fb) => {
+        // todo: complete this test
         page = new UploadPage(_nav, _modal, _action, _toast, _fb);
         spyOn(page, 'getPicture');
         page.takePic();
+        // because `getPicture` is a private function, we have to check it this way
         expect(page['getPicture']).toHaveBeenCalled();
     })));
 });

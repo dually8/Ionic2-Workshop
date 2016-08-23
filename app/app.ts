@@ -4,9 +4,11 @@ import { StatusBar } from 'ionic-native';
 
 import { UploadPage } from './pages/upload-page/upload-page';
 import { ViewPage } from './pages/view-page/view-page';
+import { FirebaseProvider } from './providers/firebase-provider/firebase-provider';
 
 @Component({
-    templateUrl: 'build/app.html'
+    templateUrl: 'build/app.html',
+    providers: [FirebaseProvider]
 })
 class MyApp {
     @ViewChild(Nav) nav: Nav;
@@ -33,7 +35,7 @@ class MyApp {
             StatusBar.styleDefault();
 
             // firebase stuff
-            // todo: put your own stuff here
+            // todo 1: put your own stuff here
             const config = {
                 apiKey: '',
                 authDomain: '',

@@ -4,8 +4,7 @@ import { Camera, CameraOptions } from 'ionic-native';
 import { FirebaseProvider } from '../../providers/firebase-provider/firebase-provider';
 
 @Component({
-    templateUrl: 'build/pages/upload-page/upload-page.html',
-    providers: [FirebaseProvider]
+    templateUrl: 'build/pages/upload-page/upload-page.html'
 })
 export class UploadPage {
 
@@ -22,7 +21,6 @@ export class UploadPage {
         public actionSheetCtrl: ActionSheetController,
         public toastCtrl: ToastController,
         private fbProv: FirebaseProvider) {
-        this.loginModal = this.modalCtrl.create(LoginModalPage);
     }
 
     ionViewDidEnter(): void {
@@ -40,7 +38,8 @@ export class UploadPage {
     }
 
     showLogin(): void {
-        if (!this.loginModal.isLoaded() || !this.loginModal.isLast()) {
+        if (!this.loginModal || !this.loginModal.isLoaded() || !this.loginModal.isLast()) {
+            // todo 2: create and present modal
             this.loginModal = this.modalCtrl.create(LoginModalPage);
             this.loginModal.present();
         }
@@ -108,6 +107,7 @@ export class UploadPage {
     }
 
     uploadPic(): void {
+        // todo 5: create upload pic function
         if (!this.photo) {
             return;
         }
@@ -128,7 +128,6 @@ export class UploadPage {
     }
 
     private getPicture(opts: CameraOptions): void {
-        console.log('gittin da pic');
         Camera.getPicture(opts)
             .then((imgData) => {
                 this.photo = 'data:image/jpeg;base64,' + imgData;
@@ -140,8 +139,7 @@ export class UploadPage {
 }
 
 @Component({
-    templateUrl: 'build/pages/upload-page/login.html',
-    providers: [FirebaseProvider]
+    templateUrl: 'build/pages/upload-page/login.html'
 })
 class LoginModalPage {
 
@@ -157,6 +155,7 @@ class LoginModalPage {
     }
 
     login(): void {
+        // todo 3: create login function
         this.fbProv.loginWithEmail(this.email, this.password)
             .then(() => {
                 // show success
@@ -177,6 +176,7 @@ class LoginModalPage {
     }
 
     createAccount(): void {
+        // todo 4: create make account function
         this.fbProv.createAccount(this.email, this.password)
             .then(() => {
                 // show success
