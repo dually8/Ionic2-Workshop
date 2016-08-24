@@ -7,7 +7,7 @@ import { ViewPage } from './view-page';
 
 let specProviders = baseProviders.concat([
     FirebaseProvider,
-    provide(LoadingController, { useClass: LoadingController }),
+    LoadingController
 ]);
 
 describe('ViewPage', () => {
