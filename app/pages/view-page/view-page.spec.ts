@@ -6,9 +6,8 @@ import { FirebaseProvider } from '../../providers/firebase-provider/firebase-pro
 import { ViewPage } from './view-page';
 
 let specProviders = baseProviders.concat([
-    // FirebaseProvider,
-    provide(FirebaseProvider, { useClass: FirebaseProvider }),
-    provide(LoadingController, { useClass: LoadingController }),
+    FirebaseProvider,
+    LoadingController
 ]);
 
 describe('ViewPage', () => {

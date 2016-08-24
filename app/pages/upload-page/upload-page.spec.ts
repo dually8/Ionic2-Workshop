@@ -7,9 +7,9 @@ import { UploadPage } from './upload-page';
 
 let specProviders = baseProviders.concat([
     FirebaseProvider,
-    provide(ModalController, { useClass: ModalController }),
-    provide(ActionSheetController, { useClass: ActionSheetController }),
-    provide(ToastController, { useClass: ToastController }),
+    ModalController,
+    ActionSheetController,
+    ToastController
 ]);
 
 describe('UploadPage', () => {
