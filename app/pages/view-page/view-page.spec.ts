@@ -29,7 +29,6 @@ describe('ViewPage', () => {
         page.getPhotos()
             .then(() => {
                 expect(_fb.getPics).toHaveBeenCalled();
-                expect(page.myPhotos[0]).toBe('pics');
             });
     })));
 
